@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Galaspace',
       home: Scaffold(
         body: Center(
-          child: Text('Hola Mundo Miguel!'),
+          child: Text('Hola Mundo Miguel dueñez!'),
         ),
       ),
     );
