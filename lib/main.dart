@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+//import 'package:flutter_localizations/flutter_localizations.dart';
+//import 'package:componentes/src/pages/home_temp.dart';
+import 'package:galaspace/src/routes/route.dart';
+//import 'package:componentes/src/pages/card_page.dart';
+
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      color: Color.fromRGBO(62, 38, 105, 1),
+      //theme: ThemeData.light(),
+      title: 'Componentes App',
       debugShowCheckedModeBanner: false,
-      title: 'Galaspace',
-      home: Scaffold(
-        body: Center(
-          child: Text('Hola Mundo Miguel dueñez'),
-        ),
-      ),
+      //home: HomePage(),
+      initialRoute: 'Login',
+      routes: getRoutes(),
+      /*onGenerateRoute: (setting) {
+        print('Ruta llamda: ${setting.name}');
+
+        return MaterialPageRoute(builder: (BuildContext context) => CardPage());
+      },*/
     );
   }
 }
