@@ -53,7 +53,7 @@ class _RegistroPageState extends State<RegistroPage> {
               SizedBox(
                 width: 20.0,
               ),
-              Icon(Icons.person_pin_circle, color: Colors.black, size: 100.00),
+              Image(image: AssetImage('assets/img/logo.png')),
               SizedBox(
                 width: 30.0,
               ),

@@ -57,7 +57,10 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(top: 40.0),
           child: Column(
             children: <Widget>[
-              Icon(Icons.person_pin_circle, color: Colors.black, size: 100.00),
+              Image(
+                image: AssetImage('assets/img/logo.png'),
+                width: 125.0,
+              ),
               SizedBox(
                 height: 10.0,
                 width: double.infinity,
@@ -65,6 +68,7 @@ class _LoginPageState extends State<LoginPage> {
               Text(
                 'Galaspace',
                 style: TextStyle(
+                  fontFamily: 'ArialRoundedMTBold',
                   color: Color.fromRGBO(62, 38, 105, 1),
                   fontSize: 40.0,
                 ),
