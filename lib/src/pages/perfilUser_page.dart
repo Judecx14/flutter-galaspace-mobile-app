@@ -7,6 +7,7 @@ class PerfilUsuarioPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         backgroundColor: Colors.white, //fromRGBO(92, 78, 154, 1),
         /*actions: [
           IconButton(
