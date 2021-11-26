@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class PerfilUsuarioPage extends StatefulWidget {
+class PerfilOtroUsuarioPage extends StatefulWidget {
   @override
   _PerfilUsuarioPageState createState() => _PerfilUsuarioPageState();
 }
 
-class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
+class _PerfilUsuarioPageState extends State<PerfilOtroUsuarioPage> {
   Color _color_btn = Color.fromRGBO(92, 78, 154, 1);
 
   Icon _icono = Icon(
-    Icons.camera_alt,
+    Icons.person_add,
     color: Colors.white,
-    size: 28,
+    size: 25,
   );
 
   @override
@@ -37,7 +37,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
           style:
               TextStyle(color: Color.fromRGBO(92, 78, 154, 1), fontSize: 18.0),
         ),
-        actions: [
+        /*actions: [
           IconButton(
               icon: Icon(Icons.more_vert_rounded),
               color: Color.fromRGBO(92, 78, 154, 1),
@@ -45,7 +45,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               onPressed: () {
                 print('Hola mundo');
               }),
-        ],
+        ],*/
       ),
       body: ListView(
         children: [
@@ -193,14 +193,14 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               ),
               onTap: () async {
                 print('hola mundo ');
-                /*setState(() {
+                setState(() {
                   _color_btn = Colors.white;
                   _icono = Icon(
                     Icons.check,
                     color: Colors.green,
                     size: 45,
                   );
-                });*/
+                });
 
                 //final source = await showImageSource(context);
                 //if (source == null) return;
@@ -247,7 +247,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         //padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
         child: Center(
             child: Text(
-          'Editar Perfil',
+          'Enviar mensaje',
           style: TextStyle(
               fontSize: 25.0 /*, color: Color.fromRGBO(92, 78, 154, 1)*/),
         )),
@@ -272,8 +272,8 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
       textColor: Colors.white,*/
       onPressed: () {
         print('Hola mundo');
-        //Navigator.pushReplacementNamed(context, 'Perfil');
-        //Navigator.pushNamed(context, 'Perfil');
+        //Navigator.pushReplacementNamed(context, 'ChatUsuario');
+        Navigator.pushNamed(context, 'ChatUsuario');
       },
     );
   }
