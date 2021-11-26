@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:galaspace/src/pages/search_page.dart';
+import 'package:galaspace/src/pages/settings_page.dart';
 import 'package:galaspace/src/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -109,8 +111,41 @@ class _BottomNavigationBarCustom extends StatelessWidget {
               label: 'Menú',
             ),
           ],
+          onTap: (int index) {
+            Navigator.push(context, _createRoute(index));
+          },
         ),
       ),
+    );
+  }
+
+  Route _createRoute(int index) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) {
+        switch (index) {
+          case 0:
+            return const HomePage();
+          case 1:
+            return const SearchPage();
+          case 2:
+            return const SettingsPage();
+          default:
+            return const HomePage();
+        }
+      },
+      transitionsBuilder: (_, animation, __, child) {
+        const begin = Offset(1.0, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 }

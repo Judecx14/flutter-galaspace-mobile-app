@@ -253,7 +253,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () {
         print('Hola mundo');
         //Navigator.pushReplacementNamed(context, 'Perfil');
-        Navigator.pushReplacementNamed(context, 'Perfil');
+        Navigator.pushReplacementNamed(context, 'Home');
       },
     );
   }
