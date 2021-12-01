@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      color: Color.fromRGBO(62, 38, 105, 1),
+      color: const Color.fromRGBO(62, 38, 105, 1),
       //theme: ThemeData.light(),
       title: 'Componentes App',
       debugShowCheckedModeBanner: false,
@@ -23,6 +23,9 @@ class MyApp extends StatelessWidget {
 
         return MaterialPageRoute(builder: (BuildContext context) => CardPage());
       },*/
+      theme: ThemeData(
+        primarySwatch: Colors.grey,
+      ),
     );
   }
 }

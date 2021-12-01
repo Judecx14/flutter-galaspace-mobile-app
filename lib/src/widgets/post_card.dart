@@ -62,6 +62,7 @@ class _PostContent extends StatefulWidget {
 class _PostContentState extends State<_PostContent> {
   final Color pink = const Color.fromRGBO(231, 31, 118, 1);
   bool isLoved = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -85,15 +86,8 @@ class _PostContentState extends State<_PostContent> {
                   ),
                 ),
               ),
-              if (widget.isMine) Spacer(),
-              if (widget.isMine)
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.more_vert,
-                    color: pink,
-                  ),
-                )
+              if (widget.isMine) const Spacer(),
+              if (widget.isMine) _popUpMenu()
             ],
           ),
         ),
@@ -164,6 +158,42 @@ class _PostContentState extends State<_PostContent> {
                 ),
               )
             ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  PopupMenuButton _popUpMenu() {
+    return PopupMenuButton(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      icon: Icon(
+        Icons.more_vert,
+        color: pink,
+      ),
+      itemBuilder: (BuildContext context) => [
+        const PopupMenuItem(
+          child: ListTile(
+            trailing: Icon(Icons.edit),
+            title: Text(
+              'Editar',
+              style: TextStyle(
+                fontFamily: 'Arial',
+                color: Colors.black54,
+              ),
+            ),
+          ),
+        ),
+        const PopupMenuItem(
+          child: ListTile(
+            trailing: Icon(Icons.delete),
+            title: Text(
+              'Eliminar',
+              style: TextStyle(
+                fontFamily: 'Arial',
+                color: Colors.black54,
+              ),
+            ),
           ),
         ),
       ],
