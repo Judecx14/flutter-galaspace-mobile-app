@@ -87,30 +87,35 @@ class _ItemResult extends StatelessWidget {
   final Color pink;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      margin: const EdgeInsets.only(top: 20.0),
-      height: 80.0,
-      decoration: _itemDecoration(),
-      child: ListTile(
-        leading: const CircleAvatar(
-          backgroundImage: AssetImage('assets/img/friend.jpg'),
-        ),
-        title: const Text(
-          'Hailee Steinfeld',
-          style: TextStyle(
-            fontSize: 20.0,
-            fontFamily: 'Arial',
-            color: Colors.grey,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, 'OPerfil');
+      },
+      child: Container(
+        alignment: Alignment.center,
+        margin: const EdgeInsets.only(top: 20.0),
+        height: 80.0,
+        decoration: _itemDecoration(),
+        child: ListTile(
+          leading: const CircleAvatar(
+            backgroundImage: AssetImage('assets/img/friend.jpg'),
           ),
-        ),
-        trailing: ClipOval(
-          child: Material(
-            color: Colors.transparent,
-            child: IconButton(
-              icon: const Icon(Icons.person_add),
-              color: pink,
-              onPressed: () {},
+          title: const Text(
+            'Hailee Steinfeld',
+            style: TextStyle(
+              fontSize: 20.0,
+              fontFamily: 'Arial',
+              color: Colors.grey,
+            ),
+          ),
+          trailing: ClipOval(
+            child: Material(
+              color: Colors.transparent,
+              child: IconButton(
+                icon: const Icon(Icons.person_add),
+                color: pink,
+                onPressed: () {},
+              ),
             ),
           ),
         ),

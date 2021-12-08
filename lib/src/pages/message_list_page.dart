@@ -80,6 +80,7 @@ class _SearchBar extends StatelessWidget {
     final searchProvider = Provider.of<SearchContactProvider>(context);
 
     return CupertinoSearchTextField(
+      autofocus: false,
       padding: const EdgeInsets.symmetric(
         vertical: 15.0,
         horizontal: 10.0,
@@ -111,60 +112,65 @@ class _ItemMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.0),
-        color: Colors.white,
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            offset: Offset(0.0, 0.0),
-            blurRadius: 7.5,
-          )
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          ListTile(
-            leading: const CircleAvatar(
-              backgroundImage: AssetImage('assets/img/friend.jpg'),
-            ),
-            title: Text(
-              'Hailee Steinfeld',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontFamily: 'Arial',
-                color: purple,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, 'ChatUsuario');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.0),
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              offset: Offset(0.0, 0.0),
+              blurRadius: 7.5,
+            )
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            ListTile(
+              leading: const CircleAvatar(
+                backgroundImage: AssetImage('assets/img/friend.jpg'),
+              ),
+              title: Text(
+                'Hailee Steinfeld',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontFamily: 'Arial',
+                  color: purple,
+                ),
+              ),
+              trailing: isRead
+                  ? null
+                  : Icon(
+                      Icons.circle,
+                      color: pink,
+                      size: 15.0,
+                    ),
+              subtitle: Text(
+                'Hola, como te encunetras?',
+                style: TextStyle(
+                  fontFamily: 'Arial',
+                  color: isRead ? null : Colors.black,
+                ),
               ),
             ),
-            trailing: isRead
-                ? null
-                : Icon(
-                    Icons.circle,
-                    color: pink,
-                    size: 15.0,
-                  ),
-            subtitle: Text(
-              'Hola, como te encunetras?',
-              style: TextStyle(
-                fontFamily: 'Arial',
-                color: isRead ? null : Colors.black,
+            Container(
+              padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
+              child: const Text(
+                '22:00 PM',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontFamily: 'Arial',
+                  fontSize: 10.0,
+                ),
               ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
-            child: const Text(
-              '22:00 PM',
-              style: TextStyle(
-                color: Colors.grey,
-                fontFamily: 'Arial',
-                fontSize: 10.0,
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

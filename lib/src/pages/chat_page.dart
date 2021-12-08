@@ -25,10 +25,11 @@ class _ChatUsuarioPageState extends State<ChatUsuarioPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(241, 239, 239, 1),
       appBar: AppBar(
+        foregroundColor: _color_btn,
         elevation: 0.0,
         backgroundColor: Colors.white,
         flexibleSpace:
-            _crearAppBar(context, "Nombre Usuario"), //fromRGBO(92, 78, 154, 1),
+            _crearAppBar(context, "Samantha Reyes"), //fromRGBO(92, 78, 154, 1),
         centerTitle: false,
       ),
       body: Column(
@@ -36,8 +37,13 @@ class _ChatUsuarioPageState extends State<ChatUsuarioPage> {
           Container(
             height: _chat,
             child: ListView(
-              padding: EdgeInsets.only(top: 40, left: 15, right: 15),
-              children: [Text("ola mundo")],
+              padding: EdgeInsets.only(left: 15, right: 15),
+              children: <Widget>[
+                _mensajeFriend(context, "Hola, Como estas ?"),
+                _mensajePropio(context, "Hola, Bien y tu ?"),
+                _mensajeFriend(context, "Que haces?"),
+                _mensajePropio(context, "Hola, Bien y tu ?"),
+              ],
             ),
           ),
           Container(
@@ -78,10 +84,18 @@ class _ChatUsuarioPageState extends State<ChatUsuarioPage> {
                       ),
                     ),
                     Expanded(child: Container()),
-                    Icon(
-                      Icons.send,
-                      size: 40,
-                      color: _color_btn,
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          Navigator.pushReplacementNamed(
+                              context, 'ChatUsuario');
+                        });
+                      },
+                      child: Icon(
+                        Icons.send,
+                        size: 40,
+                        color: _color_btn,
+                      ),
                     ),
                     SizedBox(
                       width: 20,
@@ -93,19 +107,6 @@ class _ChatUsuarioPageState extends State<ChatUsuarioPage> {
           ),
         ],
       ),
-      /*ListView(
-        children: [
-          //_crearAppBar(context, 'Perfil'),
-          _imgUser(context),
-          Container(
-            color: Colors.redAccent,
-            child: Center(
-              child: Text('Hola mundo'),
-            ),
-            height: 900.0,
-          ),
-        ],
-      ),*/
     );
   }
 
@@ -124,19 +125,17 @@ class _ChatUsuarioPageState extends State<ChatUsuarioPage> {
                 //color: Colors.red,
                 child: Row(
                   children: [
-                    Icon(
+                    /*Icon(
                       Icons.arrow_back,
                       color: Color.fromRGBO(92, 78, 154, 1),
 
                       //=> Navigator.pushReplacementNamed(context, 'Login'),
-                    ),
+                    ),*/
                     SizedBox(
-                      width: 10,
+                      width: 40,
                     ),
                     CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          'https://dam.esquirelat.com/wp-content/uploads/2020/07/STANLEE.jpg'),
-                      //placeholder: AssetImage('assets/jar-loading.gif'),
+                      backgroundImage: AssetImage("assets/img/friend.jpg"),
                     ),
                   ],
                 ),
@@ -153,6 +152,41 @@ class _ChatUsuarioPageState extends State<ChatUsuarioPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _mensajeFriend(BuildContext context, String mns) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Color.fromRGBO(231, 31, 118, 0.26),
+      ),
+      margin: EdgeInsets.only(top: 20, right: 160),
+      padding: EdgeInsets.only(top: 10, left: 20),
+      height: 40.0,
+      child: Text(
+        mns,
+        style:
+            TextStyle(color: Colors.black, fontFamily: 'Arial', fontSize: 15),
+      ),
+    );
+  }
+
+  Widget _mensajePropio(BuildContext context, String mns) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Color.fromRGBO(98, 78, 154, 1),
+      ),
+      margin: EdgeInsets.only(top: 30, left: 160),
+      padding: EdgeInsets.only(top: 10, left: 70),
+      width: 70,
+      height: 40,
+      child: Text(
+        mns,
+        style:
+            TextStyle(color: Colors.white, fontFamily: 'Arial', fontSize: 15),
       ),
     );
   }

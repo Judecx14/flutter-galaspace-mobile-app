@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:galaspace/src/pages/home_page.dart';
 
 class RegistroPage extends StatefulWidget {
   @override
@@ -142,7 +143,11 @@ class _RegistroPageState extends State<RegistroPage> {
                 borderRadius: BorderRadius.circular(50.0)),
             onPressed: () {
               print('Pagina de Registro');
-              Navigator.pushReplacementNamed(context, 'Perfil');
+              Navigator.of(context).popUntil((route) => route.isFirst);
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => HomePage()));
             },
             child: Text(
               'Crear Cuenta',

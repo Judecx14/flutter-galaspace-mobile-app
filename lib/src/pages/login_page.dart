@@ -125,9 +125,9 @@ class _LoginPageState extends State<LoginPage> {
               Text(
                 'Galaspace',
                 style: TextStyle(
-                  color: Color.fromRGBO(62, 38, 105, 1),
-                  fontSize: 40.0,
-                ),
+                    color: Color.fromRGBO(62, 38, 105, 1),
+                    fontSize: 40.0,
+                    fontFamily: 'ArialRoundedMTBold'),
               )
             ],
           ),
@@ -273,6 +273,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Text(
           'INGRESAR',
           style: TextStyle(
+              fontFamily: 'ArialRoundedMTBold',
               fontSize: 25.0 /*, color: Color.fromRGBO(92, 78, 154, 1)*/),
         )),
       ),
@@ -291,10 +292,11 @@ class _LoginPageState extends State<LoginPage> {
           (EmailValidator.validate(_email) /*&& validateStructure(_password)*/
               ? () {
                   print(' $_email  $_password');
-                  Navigator.pushReplacementNamed(context, 'Perfil');
+                  Navigator.pushReplacementNamed(context, 'Home');
                 }
               : () {
                   print('Error');
+                  //Navigator.pushReplacementNamed(context, 'Perfil');
                   mostrarAlerta(context, 'Correo o Contraseña son incorrectos');
                 }),
     );
