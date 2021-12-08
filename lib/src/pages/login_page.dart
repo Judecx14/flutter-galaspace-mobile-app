@@ -115,9 +115,9 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               Image(
                 image: AssetImage('assets/img/logo.png'),
-                width: 120,
-                height: 120,
+                width: 150,
               ),
+              /* Icon(Icons.person_pin_circle, color: Colors.black, size: 100.00), */
               SizedBox(
                 height: 10.0,
                 width: double.infinity,
@@ -292,12 +292,12 @@ class _LoginPageState extends State<LoginPage> {
           (EmailValidator.validate(_email) /*&& validateStructure(_password)*/
               ? () {
                   print(' $_email  $_password');
-                  Navigator.pushReplacementNamed(context, 'Perfil');
+                  Navigator.pushReplacementNamed(context, 'Home');
                 }
               : () {
                   print('Error');
-                  Navigator.pushReplacementNamed(context, 'Perfil');
-                  //mostrarAlerta(context, 'Correo o Contraseña son incorrectos');
+                  //Navigator.pushReplacementNamed(context, 'Perfil');
+                  mostrarAlerta(context, 'Correo o Contraseña son incorrectos');
                 }),
     );
   }

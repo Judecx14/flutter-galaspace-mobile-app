@@ -29,7 +29,7 @@ class _PerfilUsuarioPageState extends State<PerfilOtroUsuarioPage> {
             tooltip: 'Atras',
             onPressed: () {
               print('Hola mundo');
-              Navigator.pushReplacementNamed(context, 'Login');
+              Navigator.pop(context);
             }),
         centerTitle: false,
         //backgroundColor: Colors.brown[900],
@@ -53,7 +53,7 @@ class _PerfilUsuarioPageState extends State<PerfilOtroUsuarioPage> {
           //_crearAppBar(context, 'Perfil'),
           _imgUser(context),
           PostCard(
-            isMine: true,
+            isMine: false,
             withImage: true,
           ),
           PostCard(
@@ -74,29 +74,22 @@ class _PerfilUsuarioPageState extends State<PerfilOtroUsuarioPage> {
         Stack(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            CircleAvatar(
+              maxRadius: 100,
+              /*decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: Colors.red,
+              ),
               alignment: Alignment.center,
               height: 203,
-              width: 203,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Container(
-                  child:
-                      /*(image != null) == true
-                      ? Image.file(
-                          image,
-                          width: 200,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        )
-                      : */
-                      FadeInImage(
-                    image: AssetImage('assets/img/friend.jpg'),
-                    placeholder: AssetImage('assets/img/loading.gif'),
-                    fadeInDuration: Duration(milliseconds: 300),
-                  ),
-                ),
-              ),
+              width: 203,*/
+              backgroundImage: AssetImage('assets/img/friend.jpg'),
+              /*FadeInImage(
+                image: AssetImage('assets/img/friend.jpg'),
+                placeholder: AssetImage('assets/img/loading.gif'),
+                fadeInDuration: Duration(milliseconds: 300),
+                fit: BoxFit.cover,
+              ),*/
             ),
             GestureDetector(
               child: AnimatedContainer(
@@ -140,14 +133,14 @@ class _PerfilUsuarioPageState extends State<PerfilOtroUsuarioPage> {
           height: 20.0,
         ),
         Text(
-          'Hola Mundo',
+          'Hailee Steinfeld',
           style: TextStyle(
             fontSize: 24,
             color: Color.fromRGBO(92, 78, 154, 1),
           ),
         ),
         Text(
-          'Hola Mundo',
+          'believe yourself',
           style: TextStyle(
             fontSize: 14,
             color: Color.fromRGBO(92, 78, 154, 1),

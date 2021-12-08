@@ -25,6 +25,7 @@ class _ChatUsuarioPageState extends State<ChatUsuarioPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(241, 239, 239, 1),
       appBar: AppBar(
+        foregroundColor: _color_btn,
         elevation: 0.0,
         backgroundColor: Colors.white,
         flexibleSpace:
@@ -124,14 +125,14 @@ class _ChatUsuarioPageState extends State<ChatUsuarioPage> {
                 //color: Colors.red,
                 child: Row(
                   children: [
-                    Icon(
+                    /*Icon(
                       Icons.arrow_back,
                       color: Color.fromRGBO(92, 78, 154, 1),
 
                       //=> Navigator.pushReplacementNamed(context, 'Login'),
-                    ),
+                    ),*/
                     SizedBox(
-                      width: 10,
+                      width: 40,
                     ),
                     CircleAvatar(
                       backgroundImage: AssetImage("assets/img/friend.jpg"),

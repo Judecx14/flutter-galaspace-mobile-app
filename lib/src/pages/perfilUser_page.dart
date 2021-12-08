@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:galaspace/src/pages/login_page.dart';
 import 'package:galaspace/src/widgets/post_card.dart';
 
 class PerfilUsuarioPage extends StatefulWidget {
@@ -8,6 +9,7 @@ class PerfilUsuarioPage extends StatefulWidget {
 
 class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
   Color _color_btn = Color.fromRGBO(92, 78, 154, 1);
+  final Color pink = const Color.fromRGBO(231, 31, 118, 1);
 
   Icon _icono = Icon(
     Icons.camera_alt,
@@ -29,7 +31,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             tooltip: 'Atras',
             onPressed: () {
               print('Hola mundo');
-              //Navigator.pushReplacementNamed(context, 'Login');
+              Navigator.pop(context);
             }),
         centerTitle: false,
         //backgroundColor: Colors.brown[900],
@@ -38,23 +40,14 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
           style:
               TextStyle(color: Color.fromRGBO(92, 78, 154, 1), fontSize: 18.0),
         ),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.more_vert_rounded),
-              color: Color.fromRGBO(92, 78, 154, 1),
-              tooltip: 'Configuracion',
-              onPressed: () {
-                print('Hola mundo');
-                Navigator.pushNamed(context, 'Settings');
-              }),
-        ],
+        actions: [_popUpMenu()],
       ),
       body: ListView(
         children: [
           //_crearAppBar(context, 'Perfil'),
           _imgUser(context),
           PostCard(
-            isMine: false,
+            isMine: true,
             withImage: false,
           ),
           PostCard(
@@ -62,7 +55,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             withImage: true,
           ),
           PostCard(
-            isMine: false,
+            isMine: true,
             withImage: true,
           ),
         ],
@@ -79,29 +72,9 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         Stack(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              alignment: Alignment.center,
-              height: 203,
-              width: 203,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Container(
-                  child:
-                      /*(image != null) == true
-                      ? Image.file(
-                          image,
-                          width: 200,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        )
-                      : */
-                      FadeInImage(
-                    image: AssetImage('assets/img/me.jpeg'),
-                    placeholder: AssetImage('assets/img/loading.gif'),
-                    fadeInDuration: Duration(milliseconds: 300),
-                  ),
-                ),
-              ),
+            CircleAvatar(
+              maxRadius: 100,
+              backgroundImage: AssetImage('assets/img/me.jpeg'),
             ),
             GestureDetector(
               child: AnimatedContainer(
@@ -145,14 +118,14 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
           height: 20.0,
         ),
         Text(
-          'Hola Mundo',
+          'Steve Jobs',
           style: TextStyle(
             fontSize: 24,
             color: Color.fromRGBO(92, 78, 154, 1),
           ),
         ),
         Text(
-          'Hola Mundo',
+          '¡La vida es Buena!',
           style: TextStyle(
             fontSize: 14,
             color: Color.fromRGBO(92, 78, 154, 1),
@@ -228,5 +201,42 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
     };
 
     return MaterialStateProperty.resolveWith(getBorde);
+  }
+
+  PopupMenuButton _popUpMenu() {
+    return PopupMenuButton(
+      onSelected: (value) {
+        if (value == 0) {
+          Navigator.of(context).popUntil((route) => route.isFirst);
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      LoginPage())); //Navigator.pushReplacementNamed(context, 'Login')
+        } else {
+          print("hola mundo");
+        }
+      },
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      icon: Icon(
+        Icons.more_vert,
+        color: _color_btn,
+      ),
+      itemBuilder: (BuildContext context) => [
+        PopupMenuItem(
+          value: 0,
+          child: ListTile(
+            trailing: Icon(Icons.logout),
+            title: Text(
+              'Cerrar Sesión',
+              style: TextStyle(
+                fontFamily: 'Arial',
+                color: Colors.black54,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
