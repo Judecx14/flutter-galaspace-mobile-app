@@ -25,17 +25,28 @@ class _ChatUsuarioPageState extends State<ChatUsuarioPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(241, 239, 239, 1),
       appBar: AppBar(
+        centerTitle: false,
         foregroundColor: _color_btn,
         elevation: 0.0,
         backgroundColor: Colors.white,
-        flexibleSpace:
-            _crearAppBar(context, "Samantha Reyes"), //fromRGBO(92, 78, 154, 1),
-        centerTitle: false,
+        //fromRGBO(92, 78,
+        title: ListTile(
+          leading: CircleAvatar(
+            backgroundImage: AssetImage('assets/img/friend.jpg'),
+          ),
+          title: Text(
+            'Hailee Steinfeld',
+            style: TextStyle(
+              fontSize: 20.0,
+              fontFamily: 'Arial',
+              color: _color_btn,
+            ),
+          ),
+        ),
       ),
       body: Column(
         children: [
-          Container(
-            height: _chat,
+          Expanded(
             child: ListView(
               padding: EdgeInsets.only(left: 15, right: 15),
               children: <Widget>[
