@@ -113,7 +113,11 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(top: 40.0),
           child: Column(
             children: <Widget>[
-              Icon(Icons.person_pin_circle, color: Colors.black, size: 100.00),
+              Image(
+                image: AssetImage('assets/img/logo.png'),
+                width: 150,
+              ),
+              /* Icon(Icons.person_pin_circle, color: Colors.black, size: 100.00), */
               SizedBox(
                 height: 10.0,
                 width: double.infinity,
