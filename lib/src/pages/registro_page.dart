@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class RegistroPage extends StatefulWidget {
   @override
@@ -8,13 +9,30 @@ class RegistroPage extends StatefulWidget {
 }
 
 class _RegistroPageState extends State<RegistroPage> {
+  String _nombre = '', _apellido = '', _email = '', _password = '';
+  bool validateStructure(String value) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = new RegExp(pattern);
+    return regExp.hasMatch(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Color.fromRGBO(92, 78, 154, 0),
+        /*toolbarHeight: 130.0,
+
+        //title: _crearFondo(context),
+        flexibleSpace: _crearFondo(context, _screenSize),*/
+      ),
+      backgroundColor: Color.fromRGBO(92, 78, 154, 1),
       body: Stack(
         children: [
-          _crearFondo(context, _screenSize),
+          //_crearFondo(context, _screenSize),
           _loginForm(context),
         ],
       ),
@@ -53,7 +71,7 @@ class _RegistroPageState extends State<RegistroPage> {
               SizedBox(
                 width: 20.0,
               ),
-              Image(image: AssetImage('assets/img/logo.png')),
+              Icon(Icons.person_pin_circle, color: Colors.black, size: 100.00),
               SizedBox(
                 width: 30.0,
               ),
@@ -78,7 +96,18 @@ class _RegistroPageState extends State<RegistroPage> {
         children: <Widget>[
           SafeArea(
               child: Container(
-            height: 200.0,
+            height: 50.0,
+          )),
+          Container(
+            width: 370.0,
+            child: Text(
+              "Crear una nueva cuenta",
+              style: TextStyle(fontSize: 36, color: Colors.white),
+            ),
+          ),
+          SafeArea(
+              child: Container(
+            height: 50.0,
           )),
           //_crearEmail(),
           Container(
@@ -98,14 +127,12 @@ class _RegistroPageState extends State<RegistroPage> {
                   height: 30.0,
                 ),
                 _crearPassword(),
-                SizedBox(
-                  height: 40.0,
-                ),
-                _crearBoton(),
+
+                //_crearBoton(),
               ],
             ),
           ),
-          SizedBox(height: 20.0),
+          SizedBox(height: 70.0),
           FlatButton(
             height: 60.0,
             minWidth: 370.0,
@@ -115,10 +142,10 @@ class _RegistroPageState extends State<RegistroPage> {
                 borderRadius: BorderRadius.circular(50.0)),
             onPressed: () {
               print('Pagina de Registro');
-              Navigator.pushReplacementNamed(context, 'Login');
+              Navigator.pushReplacementNamed(context, 'Perfil');
             },
             child: Text(
-              'ATRAS',
+              'Crear Cuenta',
               style: TextStyle(
                   fontSize: 25.0 /*, color: Color.fromRGBO(92, 78, 154, 1)*/),
             ),
@@ -140,16 +167,23 @@ class _RegistroPageState extends State<RegistroPage> {
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 30.0),
         child: TextField(
+          autofocus: false,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             //contentPadding: EdgeInsets.only(left: 20.0),
             icon: Icon(
-              Icons.person_pin_rounded,
+              Icons.person,
               color: Colors.deepPurpleAccent,
             ),
             hintText: 'ej. Juan Carlos',
             labelText: 'NOMBRE',
+            errorText: (_nombre.length == 3) ? 'Nombre no es Correcto' : null,
           ),
+          onChanged: (valor) {
+            setState(() {
+              _nombre = valor;
+            });
+          },
         ),
       ),
     );
@@ -166,16 +200,24 @@ class _RegistroPageState extends State<RegistroPage> {
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 30.0),
         child: TextField(
+          autofocus: false,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             //contentPadding: EdgeInsets.only(left: 20.0),
             icon: Icon(
-              Icons.person_pin_rounded,
+              Icons.person,
               color: Colors.deepPurpleAccent,
             ),
             hintText: 'ej. Gonzalez Paz',
             labelText: 'APELLIDOS',
+            errorText:
+                (_apellido.length == 3) ? 'Apellido no es Correcto' : null,
           ),
+          onChanged: (valor) {
+            setState(() {
+              _apellido = valor;
+            });
+          },
         ),
       ),
     );
@@ -210,18 +252,32 @@ class _RegistroPageState extends State<RegistroPage> {
       ),
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 30.0),
-        child: TextField(
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            //contentPadding: EdgeInsets.only(left: 20.0),
-            icon: Icon(
-              Icons.email,
-              color: Colors.deepPurpleAccent,
-            ),
-            hintText: 'ejemplo@correo.com',
-            labelText: 'Email',
-          ),
-        ),
+        child: StreamBuilder(
+            stream: null,
+            builder: (context, snapshot) {
+              return TextField(
+                autofocus: false,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  //contentPadding: EdgeInsets.only(left: 20.0),
+                  icon: Icon(
+                    Icons.email,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  hintText: 'ejemplo@correo.com',
+                  labelText: 'Email',
+                  errorText:
+                      (!EmailValidator.validate(_email) && _email.length > 5)
+                          ? 'Email no es Correcto'
+                          : null,
+                ),
+                onChanged: (valor) {
+                  setState(() {
+                    _email = valor;
+                  });
+                },
+              );
+            }),
       ),
     );
   }
@@ -255,6 +311,7 @@ class _RegistroPageState extends State<RegistroPage> {
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 30.0),
         child: TextField(
+          autofocus: false,
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
           decoration: InputDecoration(
@@ -263,7 +320,15 @@ class _RegistroPageState extends State<RegistroPage> {
               color: Colors.deepPurpleAccent,
             ),
             labelText: 'Password',
+            errorText: (!validateStructure(_password) && _password.length > 4)
+                ? 'Contraseña Incorrecta ej. Vignesh123!'
+                : null,
           ),
+          onChanged: (valor) {
+            setState(() {
+              _password = valor;
+            });
+          },
         ),
       ),
     );
@@ -271,39 +336,43 @@ class _RegistroPageState extends State<RegistroPage> {
 
   Widget _crearBoton() {
     //fromValidStream
-    return ElevatedButton(
-      child: Container(
-        width: 370.0,
-        height: 60.0,
-        //padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-        child: Center(
-            child: Text(
-          'GUARDAR',
-          style: TextStyle(
-              fontSize: 25.0 /*, color: Color.fromRGBO(92, 78, 154, 1)*/),
-        )),
-      ),
-      style: ButtonStyle(
-        foregroundColor: getColor(Color.fromRGBO(92, 78, 154, 1), Colors.white),
-        backgroundColor: getColor(
-            Color.fromRGBO(255, 255, 255, 1), Color.fromRGBO(92, 78, 154, 1)),
-        side: getBorde(Color.fromRGBO(92, 78, 154, 1), Colors.black),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50.0),
-              side: BorderSide(color: Colors.red)),
-        ),
-      ),
-
-      /*shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(50.0),
-      ),
-      color: Colors.white,
-      textColor: Colors.white,*/
-      onPressed: () {
-        print('Hola mundo');
-      },
-    );
+    return StreamBuilder(
+        stream: null,
+        builder: (context, snapshot) {
+          return ElevatedButton(
+            child: Container(
+              width: 370.0,
+              height: 60.0,
+              //padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+              child: Center(
+                  child: Text(
+                'GUARDAR',
+                style: TextStyle(
+                    fontSize: 25.0 /*, color: Color.fromRGBO(92, 78, 154, 1)*/),
+              )),
+            ),
+            style: ButtonStyle(
+              foregroundColor:
+                  getColor(Color.fromRGBO(92, 78, 154, 1), Colors.white),
+              backgroundColor: getColor(Color.fromRGBO(255, 255, 255, 1),
+                  Color.fromRGBO(92, 78, 154, 1)),
+              side: getBorde(Color.fromRGBO(92, 78, 154, 1), Colors.black),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    side: BorderSide(color: Colors.red)),
+              ),
+            ),
+            onPressed:
+                (EmailValidator.validate(_email) && validateStructure(_password)
+                    ? () {
+                        print('hola mundo $_email  $_password');
+                      }
+                    : () {
+                        print('Error');
+                      }),
+          );
+        });
   }
 
   MaterialStateProperty<Color> getColor(Color color, Color colorPresionado) {
