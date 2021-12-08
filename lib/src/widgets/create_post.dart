@@ -9,7 +9,6 @@ class CreatePost extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 7.5, vertical: 2.5),
       padding: const EdgeInsets.all(15.0),
       width: double.infinity,
-      height: 150.0,
       decoration: _postBoxDecoration(),
       child: const _CreatePostForm(),
     );

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         title: 'Componentes App',
         debugShowCheckedModeBanner: false,
         //home: HomePage(),
-        initialRoute: 'Messages',
+        initialRoute: 'Login',
         routes: getRoutes(),
         /*onGenerateRoute: (setting) {
           print('Ruta llamda: ${setting.name}');
