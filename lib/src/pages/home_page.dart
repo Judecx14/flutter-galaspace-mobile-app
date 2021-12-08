@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:galaspace/src/pages/messages_page.dart';
 import 'package:galaspace/src/pages/search_page.dart';
 import 'package:galaspace/src/pages/settings_page.dart';
 import 'package:galaspace/src/widgets/widgets.dart';
@@ -21,7 +22,10 @@ class HomePage extends StatelessWidget {
         ),
         title: const Text(
           'Publicaciones',
-          style: TextStyle(fontFamily: 'ArialRoundedMTBold'),
+          style: TextStyle(
+            fontFamily: 'ArialRoundedMTBold',
+            color: Colors.white,
+          ),
         ),
         actions: [
           Padding(
@@ -33,7 +37,9 @@ class HomePage extends StatelessWidget {
                   Icons.message,
                   color: purple,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, _messagesRoute());
+                },
               ),
             ),
           )
@@ -41,6 +47,21 @@ class HomePage extends StatelessWidget {
       ),
       body: ListView(
         children: [
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+              vertical: 20.0,
+            ),
+            child: Text(
+              'Crear nueva publicación',
+              style: TextStyle(
+                color: purple,
+                fontFamily: 'Arial',
+                fontSize: 20.0,
+              ),
+            ),
+          ),
+          const CreatePost(),
           PostCard(
             isMine: false,
             withImage: false,
@@ -56,6 +77,27 @@ class HomePage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: _BottomNavigationBarCustom(purple: purple),
+    );
+  }
+
+  Route _messagesRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return MessagesPages();
+      },
+      transitionsBuilder: (_, animation, __, child) {
+        const begin = Offset(1.0, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
     );
   }
 }
