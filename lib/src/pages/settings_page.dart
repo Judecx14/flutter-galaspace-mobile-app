@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:galaspace/src/pages/login_page.dart';
+import 'package:galaspace/src/providers/ui_provider.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -30,20 +33,35 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(
               height: 25.0,
             ),
-            _OptionCard(
-              color: purple,
-              label: 'Revisa tu información o edita tus datos',
-              icon: Icons.person,
-              title: 'Perfil de usuario',
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, 'Perfil');
+              },
+              child: _OptionCard(
+                color: purple,
+                label: 'Revisa tu información o edita tus datos',
+                icon: Icons.person,
+                title: 'Perfil de usuario',
+              ),
             ),
             const SizedBox(
               height: 25.0,
             ),
-            _OptionCard(
-              color: pink,
-              label: 'Revisa la lista de tus amigos',
-              icon: Icons.group,
-              title: 'Lista de amigos',
+            GestureDetector(
+              onTap: () {
+                final providerfriend =
+                    Provider.of<UiProvider>(context, listen: false);
+
+                providerfriend.selectedOptionMenu = 1;
+
+                Navigator.pushNamed(context, 'Messages');
+              },
+              child: _OptionCard(
+                color: pink,
+                label: 'Revisa la lista de tus amigos',
+                icon: Icons.group,
+                title: 'Lista de amigos',
+              ),
             ),
             const SizedBox(
               height: 25.0,
@@ -55,12 +73,21 @@ class SettingsPage extends StatelessWidget {
               title: 'Solicitudes de amistad',
             ),
             const Spacer(),
-            const _OptionCard(
-              color: Colors.black12,
-              label: 'Puedes cerrar sesión y regresar cuando deeses',
-              icon: Icons.indeterminate_check_box,
-              title: 'Cerrar sesion',
-              colorText: Colors.black54,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LoginPage()));
+              },
+              child: _OptionCard(
+                color: Colors.black12,
+                label: 'Puedes cerrar sesión y regresar cuando deeses',
+                icon: Icons.indeterminate_check_box,
+                title: 'Cerrar sesion',
+                colorText: Colors.black54,
+              ),
             ),
           ],
         ),
@@ -76,6 +103,7 @@ class _OptionCard extends StatelessWidget {
     required this.label,
     required this.title,
     required this.icon,
+    //required this.txtTitle,
     this.colorText,
   }) : super(key: key);
 
@@ -84,6 +112,7 @@ class _OptionCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final Color? colorText;
+  //final String txtTitle;
 
   @override
   Widget build(BuildContext context) {

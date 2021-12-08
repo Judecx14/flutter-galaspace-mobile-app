@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:galaspace/src/pages/login_page.dart';
+import 'package:galaspace/src/widgets/post_card.dart';
 
 class PerfilUsuarioPage extends StatefulWidget {
   @override
@@ -7,6 +9,7 @@ class PerfilUsuarioPage extends StatefulWidget {
 
 class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
   Color _color_btn = Color.fromRGBO(92, 78, 154, 1);
+  final Color pink = const Color.fromRGBO(231, 31, 118, 1);
 
   Icon _icono = Icon(
     Icons.camera_alt,
@@ -28,7 +31,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             tooltip: 'Atras',
             onPressed: () {
               print('Hola mundo');
-              Navigator.pushReplacementNamed(context, 'Login');
+              Navigator.pop(context);
             }),
         centerTitle: false,
         //backgroundColor: Colors.brown[900],
@@ -37,107 +40,27 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
           style:
               TextStyle(color: Color.fromRGBO(92, 78, 154, 1), fontSize: 18.0),
         ),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.more_vert_rounded),
-              color: Color.fromRGBO(92, 78, 154, 1),
-              tooltip: 'Configuracion',
-              onPressed: () {
-                print('Hola mundo');
-              }),
-        ],
+        actions: [_popUpMenu()],
       ),
       body: ListView(
         children: [
           //_crearAppBar(context, 'Perfil'),
           _imgUser(context),
-          Container(
-            color: Colors.redAccent,
-            child: Center(
-              child: Text('Hola mundo'),
-            ),
-            height: 900.0,
+          PostCard(
+            isMine: true,
+            withImage: false,
           ),
-        ],
-      ),
-
-      /* CustomScrollView(
-        slivers: <Widget>[
-          _crearAppBar(context, 'Perfil'),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              SizedBox(
-                height: 10.0,
-              ),
-              Container(
-                color: Colors.redAccent,
-                child: Center(
-                  child: Text('Hola mundo'),
-                ),
-                height: 900.0,
-              )
-              /*_posterTitulo(context, pelicula),
-              _descripcion(pelicula),
-              _descripcion(pelicula),
-              _descripcion(pelicula),
-              _descripcion(pelicula),
-              _crearCasting(pelicula),*/
-            ]),
+          PostCard(
+            isMine: true,
+            withImage: true,
           ),
-        ],
-      ),*/
-    );
-  }
-
-  Widget _crearAppBar(BuildContext context, String title) {
-    return Container(
-      height: 60.0,
-      child: Row(
-        children: <Widget>[
-          IconButton(
-            color: Color.fromRGBO(92, 78, 154, 1),
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pushReplacementNamed(context, 'Login'),
-          ),
-          SizedBox(
-            width: 15.0,
-          ),
-          Text(
-            title,
-            style: TextStyle(
-                color: Color.fromRGBO(92, 78, 154, 1), fontSize: 18.0),
+          PostCard(
+            isMine: true,
+            withImage: true,
           ),
         ],
       ),
     );
-    /*SliverAppBar(
-      elevation: 2.0,
-      backgroundColor: Color.fromRGBO(92, 78, 154, 1),
-      expandedHeight: 60.0,
-      floating: false,
-      pinned: true,
-      actions: [
-        IconButton(
-            icon: Icon(Icons.arrow_back),
-            tooltip: 'Atras',
-            onPressed: () {
-              print('Hola mundo');
-            }),
-        Center(
-          child: Text(
-            //pelicula.title,
-            'Perfil',
-            style: TextStyle(color: Colors.white, fontSize: 18.0),
-          ),
-        ),
-        IconButton(
-            icon: Icon(Icons.more_vert_rounded),
-            tooltip: 'Configuracion',
-            onPressed: () {
-              print('Hola mundo');
-            }),
-      ],
-    );*/
   }
 
   Widget _imgUser(BuildContext context) {
@@ -149,32 +72,9 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         Stack(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              alignment: Alignment.center,
-              height: 203,
-              width: 203,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Container(
-                  child:
-                      /*(image != null) == true
-                      ? Image.file(
-                          image,
-                          width: 200,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        )
-                      : */
-                      FadeInImage(
-                    image: NetworkImage(
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh9j5Wq2W_i-4SWqyUK00_c0u9yEVg4f6AGw&usqp=CAU',
-                      //'https://image.flaticon.com/icons/png/512/16/16363.png',
-                    ),
-                    placeholder: AssetImage('assets/img/loading.gif'),
-                    fadeInDuration: Duration(milliseconds: 300),
-                  ),
-                ),
-              ),
+            CircleAvatar(
+              maxRadius: 100,
+              backgroundImage: AssetImage('assets/img/me.jpeg'),
             ),
             GestureDetector(
               child: AnimatedContainer(
@@ -218,14 +118,14 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
           height: 20.0,
         ),
         Text(
-          'Hola Mundo',
+          'Steve Jobs',
           style: TextStyle(
             fontSize: 24,
             color: Color.fromRGBO(92, 78, 154, 1),
           ),
         ),
         Text(
-          'Hola Mundo',
+          '¡La vida es Buena!',
           style: TextStyle(
             fontSize: 14,
             color: Color.fromRGBO(92, 78, 154, 1),
@@ -301,5 +201,42 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
     };
 
     return MaterialStateProperty.resolveWith(getBorde);
+  }
+
+  PopupMenuButton _popUpMenu() {
+    return PopupMenuButton(
+      onSelected: (value) {
+        if (value == 0) {
+          Navigator.of(context).popUntil((route) => route.isFirst);
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      LoginPage())); //Navigator.pushReplacementNamed(context, 'Login')
+        } else {
+          print("hola mundo");
+        }
+      },
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      icon: Icon(
+        Icons.more_vert,
+        color: _color_btn,
+      ),
+      itemBuilder: (BuildContext context) => [
+        PopupMenuItem(
+          value: 0,
+          child: ListTile(
+            trailing: Icon(Icons.logout),
+            title: Text(
+              'Cerrar Sesión',
+              style: TextStyle(
+                fontFamily: 'Arial',
+                color: Colors.black54,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

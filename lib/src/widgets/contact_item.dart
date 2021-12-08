@@ -5,20 +5,25 @@ class ContactItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15.0),
-      width: double.infinity,
-      decoration: _itemDecoration(),
-      child: const ListTile(
-        leading: CircleAvatar(
-          backgroundImage: AssetImage('assets/img/friend.jpg'),
-        ),
-        title: Text(
-          'Hailee Steinfeld',
-          style: TextStyle(
-            fontSize: 20.0,
-            fontFamily: 'Arial',
-            color: Colors.grey,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, 'OPerfil');
+      },
+      child: Container(
+        margin: const EdgeInsets.all(15.0),
+        width: double.infinity,
+        decoration: _itemDecoration(),
+        child: const ListTile(
+          leading: CircleAvatar(
+            backgroundImage: AssetImage('assets/img/friend.jpg'),
+          ),
+          title: Text(
+            'Hailee Steinfeld',
+            style: TextStyle(
+              fontSize: 20.0,
+              fontFamily: 'Arial',
+              color: Colors.grey,
+            ),
           ),
         ),
       ),

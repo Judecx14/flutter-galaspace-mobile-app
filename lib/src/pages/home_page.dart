@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
                   color: purple,
                 ),
                 onPressed: () {
-                  Navigator.push(context, _messagesRoute());
+                  Navigator.pushNamed(context, 'Messages');
                 },
               ),
             ),

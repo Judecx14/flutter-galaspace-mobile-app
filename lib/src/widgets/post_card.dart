@@ -69,26 +69,31 @@ class _PostContentState extends State<_PostContent> {
       children: [
         Container(
           margin: const EdgeInsets.only(left: 15.0, top: 20.0),
-          child: Row(
-            children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage('assets/img/friend.jpg'),
-                radius: 25.0,
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 15.0),
-                child: Text(
-                  'Hailee Steinfeld',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontFamily: 'Arial',
-                    color: widget.purple,
+          child: GestureDetector(
+            onTap: () {
+              !widget.isMine ? Navigator.pushNamed(context, 'OPerfil') : null;
+            },
+            child: Row(
+              children: [
+                const CircleAvatar(
+                  backgroundImage: AssetImage('assets/img/friend.jpg'),
+                  radius: 25.0,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 15.0),
+                  child: Text(
+                    'Hailee Steinfeld',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: 'Arial',
+                      color: widget.purple,
+                    ),
                   ),
                 ),
-              ),
-              if (widget.isMine) const Spacer(),
-              if (widget.isMine) _popUpMenu()
-            ],
+                if (widget.isMine) const Spacer(),
+                if (widget.isMine) _popUpMenu()
+              ],
+            ),
           ),
         ),
         if (widget.withImage)
