@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class SearchContactProvider extends ChangeNotifier {
+class SearchProvider extends ChangeNotifier {
   bool showResults = false;
   set showResultsValue(bool value) {
     showResults = value;

@@ -20,7 +20,7 @@ class SearchPage extends StatelessWidget {
         body: Container(
           padding: const EdgeInsets.all(20),
           child: ChangeNotifierProvider(
-            create: (_) => SearchProvider(),
+            create: (_) => SearchContactProvider(),
             child: _SearchContent(
               purple: purple,
               pink: pink,
@@ -43,7 +43,7 @@ class _SearchContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchProvider = Provider.of<SearchProvider>(context);
+    final searchProvider = Provider.of<SearchContactProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -138,7 +138,7 @@ class _SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchProvider = Provider.of<SearchProvider>(context);
+    final searchProvider = Provider.of<SearchContactProvider>(context);
 
     return CupertinoSearchTextField(
       padding: const EdgeInsets.symmetric(
