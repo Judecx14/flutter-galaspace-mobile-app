@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:galaspace/src/widgets/post_card.dart';
 
 class PerfilUsuarioPage extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
             tooltip: 'Atras',
             onPressed: () {
               print('Hola mundo');
-              Navigator.pushReplacementNamed(context, 'Login');
+              //Navigator.pushReplacementNamed(context, 'Login');
             }),
         centerTitle: false,
         //backgroundColor: Colors.brown[900],
@@ -44,6 +45,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
               tooltip: 'Configuracion',
               onPressed: () {
                 print('Hola mundo');
+                Navigator.pushNamed(context, 'Settings');
               }),
         ],
       ),
@@ -51,93 +53,21 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
         children: [
           //_crearAppBar(context, 'Perfil'),
           _imgUser(context),
-          Container(
-            color: Colors.redAccent,
-            child: Center(
-              child: Text('Hola mundo'),
-            ),
-            height: 900.0,
+          PostCard(
+            isMine: false,
+            withImage: false,
           ),
-        ],
-      ),
-
-      /* CustomScrollView(
-        slivers: <Widget>[
-          _crearAppBar(context, 'Perfil'),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              SizedBox(
-                height: 10.0,
-              ),
-              Container(
-                color: Colors.redAccent,
-                child: Center(
-                  child: Text('Hola mundo'),
-                ),
-                height: 900.0,
-              )
-              /*_posterTitulo(context, pelicula),
-              _descripcion(pelicula),
-              _descripcion(pelicula),
-              _descripcion(pelicula),
-              _descripcion(pelicula),
-              _crearCasting(pelicula),*/
-            ]),
+          PostCard(
+            isMine: true,
+            withImage: true,
           ),
-        ],
-      ),*/
-    );
-  }
-
-  Widget _crearAppBar(BuildContext context, String title) {
-    return Container(
-      height: 60.0,
-      child: Row(
-        children: <Widget>[
-          IconButton(
-            color: Color.fromRGBO(92, 78, 154, 1),
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pushReplacementNamed(context, 'Login'),
-          ),
-          SizedBox(
-            width: 15.0,
-          ),
-          Text(
-            title,
-            style: TextStyle(
-                color: Color.fromRGBO(92, 78, 154, 1), fontSize: 18.0),
+          PostCard(
+            isMine: false,
+            withImage: true,
           ),
         ],
       ),
     );
-    /*SliverAppBar(
-      elevation: 2.0,
-      backgroundColor: Color.fromRGBO(92, 78, 154, 1),
-      expandedHeight: 60.0,
-      floating: false,
-      pinned: true,
-      actions: [
-        IconButton(
-            icon: Icon(Icons.arrow_back),
-            tooltip: 'Atras',
-            onPressed: () {
-              print('Hola mundo');
-            }),
-        Center(
-          child: Text(
-            //pelicula.title,
-            'Perfil',
-            style: TextStyle(color: Colors.white, fontSize: 18.0),
-          ),
-        ),
-        IconButton(
-            icon: Icon(Icons.more_vert_rounded),
-            tooltip: 'Configuracion',
-            onPressed: () {
-              print('Hola mundo');
-            }),
-      ],
-    );*/
   }
 
   Widget _imgUser(BuildContext context) {
@@ -166,10 +96,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
                         )
                       : */
                       FadeInImage(
-                    image: NetworkImage(
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh9j5Wq2W_i-4SWqyUK00_c0u9yEVg4f6AGw&usqp=CAU',
-                      //'https://image.flaticon.com/icons/png/512/16/16363.png',
-                    ),
+                    image: AssetImage('assets/img/me.jpeg'),
                     placeholder: AssetImage('assets/img/loading.gif'),
                     fadeInDuration: Duration(milliseconds: 300),
                   ),
