@@ -67,7 +67,19 @@ class HomePage extends StatelessWidget {
             withImage: false,
           ),
           PostCard(
-            isMine: true,
+            isMine: false,
+            withImage: true,
+          ),
+          PostCard(
+            isMine: false,
+            withImage: true,
+          ),
+          PostCard(
+            isMine: false,
+            withImage: false,
+          ),
+          PostCard(
+            isMine: false,
             withImage: true,
           ),
           PostCard(
