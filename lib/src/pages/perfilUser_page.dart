@@ -22,6 +22,7 @@ class _PerfilUsuarioPageState extends State<PerfilUsuarioPage> {
     //final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.white, //fromRGBO(92, 78, 154, 1),
