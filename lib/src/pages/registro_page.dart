@@ -23,6 +23,7 @@ class _RegistroPageState extends State<RegistroPage> {
     final _screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         elevation: 0.0,
         backgroundColor: Color.fromRGBO(92, 78, 154, 0),
         /*toolbarHeight: 130.0,
@@ -103,7 +104,10 @@ class _RegistroPageState extends State<RegistroPage> {
             width: 370.0,
             child: Text(
               "Crear una nueva cuenta",
-              style: TextStyle(fontSize: 36, color: Colors.white),
+              style: TextStyle(
+                  fontSize: 36,
+                  color: Colors.white,
+                  fontFamily: 'ArialRoundedMTBold'),
             ),
           ),
           SafeArea(
@@ -181,7 +185,7 @@ class _RegistroPageState extends State<RegistroPage> {
               color: Colors.deepPurpleAccent,
             ),
             hintText: 'ej. Juan Carlos',
-            labelText: 'NOMBRE',
+            labelText: 'Nombre',
             errorText: (_nombre.length == 3) ? 'Nombre no es Correcto' : null,
           ),
           onChanged: (valor) {
@@ -214,7 +218,7 @@ class _RegistroPageState extends State<RegistroPage> {
               color: Colors.deepPurpleAccent,
             ),
             hintText: 'ej. Gonzalez Paz',
-            labelText: 'APELLIDOS',
+            labelText: 'Apellidos',
             errorText:
                 (_apellido.length == 3) ? 'Apellido no es Correcto' : null,
           ),
